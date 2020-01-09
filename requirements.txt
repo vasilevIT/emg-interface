@@ -5,3 +5,5 @@ pandas
 numpy
 scipy
 tables
+rarfile
+requests

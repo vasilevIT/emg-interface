@@ -6,16 +6,19 @@
  """
 import os
 import re
-
+import urllib.request as urllib
+import rarfile
 import numpy as np
 from sklearn.preprocessing import MinMaxScaler
+
 from src.data_manager.base_manager import BaseManager
 
 
 class RflabNpDataManager(BaseManager):
     def __init__(self):
         super().__init__()
-        self.path = '../data/rf-lab/nine_movs_six_sub_split 2'
+        self.dataset_remote_url = 'https://github.com/RF-Lab/emg_platform/raw/master/data/nine_movs_six_sub_split.rar'
+        self.path = '../data/rf-lab/nine_movs_six_sub_split'
         self.sc = MinMaxScaler(feature_range=(0, 1))
 
     def load(self):
@@ -23,6 +26,9 @@ class RflabNpDataManager(BaseManager):
         Load the dataset
         :return:
         """
+
+        if not os.path.isfile(self.path):
+            self.download()
         self.raw_data = self.load_raw(self.path)
         self.normalize_data = self.normalize_data(self.raw_data)
         self.result_data = self.normalize_data
@@ -75,3 +81,13 @@ class RflabNpDataManager(BaseManager):
             k = k + 1
 
         return dataset
+
+    def download(self):
+        temp_path = os.path.abspath("../data/rf-lab/temp.rar")
+        urllib.urlretrieve(self.dataset_remote_url, temp_path)
+
+        with rarfile.RarFile(temp_path, "r") as rf:
+            rf.extractall(os.path.abspath("../data/rf-lab"))
+
+        if os.path.isfile(temp_path):
+            os.unlink(temp_path)
