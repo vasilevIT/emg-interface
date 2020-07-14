@@ -61,7 +61,7 @@ X_train[np.isnan(X_train)] = 0.
 # exit()
 # X_train = np.random.random((1480, 400))
 Y_train = dataset[2:, -1]
-print(Y_train)
+print(np.unique(Y_train))
 exit()
 
 # Convert labels to categorical one-hot encoding

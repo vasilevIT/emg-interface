@@ -77,9 +77,10 @@ class RflabNpDataManager(BaseManager):
         for file in files:
             if not file.endswith(".txt"):
                 continue
-
+            print(path + '/' + file)
             data = self.read_signal(path + '/' + file)
             gesture_class = self.get_hand_gesture_class(file)
+            print(gesture_class)
             signal = self.prepare_signal(data, gesture_class)
             for x in signal:
                 dataset = np.vstack([dataset, x])
