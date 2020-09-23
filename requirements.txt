@@ -10,7 +10,7 @@ requests
 pyserial
 termplotlib==0.2.3
 termplot==0.0.2
-tensorflow==2.1.0
+tensorflow==2.2.0
 jupyter==1.0.0
 pydot
 tqdm
