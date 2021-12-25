@@ -235,7 +235,7 @@ model2.evaluate(train_signals, train_labels)
 #keras.utils.plot_model(model2, 'dense_image_classifier.png', show_shapes=True)
 
 history = model2.fit(train_signals, train_labels, epochs=25, 
-                   validation_data=(test_signals, test_labels))
+                      validation_data=(test_signals, test_labels))
 
 
 plt.figure(figsize=(10,6))
