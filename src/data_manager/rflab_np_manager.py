@@ -14,6 +14,16 @@ import pandas as pd
 
 from src.data_manager.base_manager import BaseManager
 
+from scipy import signal
+
+# Частотный фильтр
+def filter_signal(x):
+    N = 10
+    Fc = 40
+    Fs = 1600
+    h = signal.firwin(numtaps=N, cutoff=Fc, nyq=Fs / 2)
+    y = signal.lfilter(h, 1.0, x)
+    return y
 
 class RflabNpDataManager(BaseManager):
     def __init__(self):
@@ -28,7 +38,7 @@ class RflabNpDataManager(BaseManager):
         :return:
         """
 
-        if not os.path.isfile(self.path):
+        if not os.path.isdir(self.path):
             self.download()
         self.raw_data = self.load_raw(self.path)
         self.normalize_data = self.normalize_data(self.raw_data)
@@ -77,10 +87,10 @@ class RflabNpDataManager(BaseManager):
         for file in files:
             if not file.endswith(".txt"):
                 continue
-            print(path + '/' + file)
+            # print(path + '/' + file)
             data = self.read_signal(path + '/' + file)
             gesture_class = self.get_hand_gesture_class(file)
-            print(gesture_class)
+            # print('label = ' + str(gesture_class))
             signal = self.prepare_signal(data, gesture_class)
             for x in signal:
                 dataset = np.vstack([dataset, x])
@@ -89,6 +99,7 @@ class RflabNpDataManager(BaseManager):
         return np.array(dataset)
 
     def download(self):
+        print('rflab dataset dowloading...')
         temp_path = os.path.abspath("./data/rf-lab/temp.rar")
         urllib.urlretrieve(self.dataset_remote_url, temp_path)
 
