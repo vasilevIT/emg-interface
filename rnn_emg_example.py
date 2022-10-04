@@ -46,9 +46,8 @@ model = Sequential()
 num_classes = 9
 time_series = X_train.shape[1]
 model.add(Reshape((400, 1), input_shape=(400,)))
-model.add(LSTM(64, input_shape=(None, 400, 1), return_sequences=True))
-model.add(LSTM(32, return_sequences=True))
-model.add(LSTM(8))
+model.add(SimpleRNN(64, input_shape=(None, 400, 1), return_sequences=True))
+model.add(SimpleRNN(8))
 # model.add(Dense(1024, input_dim=400, activation='relu'))
 # model.add(Dropout(0.1))
 # model.add(Dense(256, activation='relu'))
