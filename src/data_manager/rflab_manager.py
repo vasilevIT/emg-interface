@@ -1,28 +1,24 @@
-import os
 import re
 import urllib.request as urllib
 import rarfile
 import numpy as np
 from sklearn.preprocessing import MinMaxScaler
 from keras.utils import to_categorical
-
 from src.data_manager.base_manager import BaseManager
-from scipy import signal
 import pickle
-import sys
 import os
 from random import shuffle
 
 
 class RflabDataManager(BaseManager):
-    def __init__(self, persons = None, moves = None):
+    def __init__(self, persons=None, moves=None):
         super().__init__()
         # TODO актуализировать
         self.dataset_remote_url = 'https://github.com/RF-Lab/emg_platform/raw/master/data/nine_movs_six_sub_split.rar'
         self.path = './data/rf-lab/nine_movs_six_sub_split/'
         self.sc = MinMaxScaler(feature_range=(0, 1))
         if (persons is None):
-            self.persons = [0, 1, 2, 3, 4, 5, 6]
+            self.persons = [1, 2, 3, 4, 5, 6]
         else:
             self.persons = persons
         if (moves is None):
@@ -76,7 +72,7 @@ class RflabDataManager(BaseManager):
         return np.fromfile(file_path)
 
     def load_raw(self, path):
-        path = path + "{}_{}.pickle"
+        path = path + "{}_{}.txt"
         sgn = []
         lbl = []
         for i in self.persons:
@@ -100,18 +96,18 @@ class RflabDataManager(BaseManager):
 
         print(sgn.shape)
 
-        train_signals = sgn[0:int(0.8 * len(sgn))]
-        train_labels = lbl[0:int(0.8 * len(lbl))]
-        val_signals = sgn[int(0.8 * len(sgn)):]
-        val_labels = lbl[int(0.8 * len(lbl)):]
+        # train_signals = sgn[0:int(0.8 * len(sgn))]
+        # train_labels = lbl[0:int(0.8 * len(lbl))]
+        # val_signals = sgn[int(0.8 * len(sgn)):]
+        # val_labels = lbl[int(0.8 * len(lbl)):]
         # test_signals = sgn[int(0.8*len(sgn)):]
         # test_labels = lbl[int(0.8*len(lbl)):]
-
-        train_labels = to_categorical(train_labels)
-        val_labels = to_categorical(val_labels)
+        #
+        # train_labels = to_categorical(train_labels)
+        # val_labels = to_categorical(val_labels)
         # test_labels = to_categorical(test_labels)
 
-        return train_signals, train_labels, val_signals, val_labels
+        return sgn, to_categorical(lbl)
 
     def download(self):
         print('rflab dataset dowloading...')

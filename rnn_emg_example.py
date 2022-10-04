@@ -1,5 +1,6 @@
 
 from src.data_manager.rflab_np_manager import RflabNpDataManager
+from src.data_manager.rflab_manager import RflabDataManager
 import numpy as np
 from keras.utils import to_categorical
 from keras import Sequential
@@ -10,6 +11,15 @@ import matplotlib.pyplot as plt
 
 np.set_printoptions(suppress=True)
 
+
+
+
+rflab_manager = RflabDataManager()
+X_train, y_train = rflab_manager.load()
+
+print(y_train[0:1])
+print(X_train[0:1])
+exit()
 
 rflab_manager = RflabNpDataManager()
 dataset = rflab_manager.load()
