@@ -1,19 +1,7 @@
+from keras.layers import GlobalAveragePooling1D, MaxPooling1D, Flatten, Dense, BatchNormalization, LSTM, Conv1D, \
+    Reshape, Dropout
 from keras.optimizers import Adam
-from keras.layers import TimeDistributed, Flatten
-from keras.layers import Conv1D
-from keras.optimizers import Adam
-from keras.layers import TimeDistributed, Flatten, GlobalAveragePooling1D, MaxPooling1D
-from keras.callbacks import ModelCheckpoint, EarlyStopping
-from keras.optimizers import Adam
-from keras.layers import TimeDistributed, Flatten
-from src.data_manager.rflab_np_manager import RflabNpDataManager
-import numpy as np
-from keras.utils import to_categorical
 from keras import Sequential
-from keras.layers import Embedding, SimpleRNN, Dense, BatchNormalization, LSTM, Conv1D, Reshape, Dropout
-from keras.datasets import imdb
-from keras.utils import pad_sequences
-import matplotlib.pyplot as plt
 
 
 class Factory:
