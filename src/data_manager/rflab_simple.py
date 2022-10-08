@@ -87,8 +87,14 @@ def _scale(X):
     :param X:
     :return:
     """
-    scaler = StandardScaler()
+
+    X_min =  np.min(X)
+    X_max = np.max(X)
+    print("max: {0}, min: {1}".format(X_max, X_min))
+    X = (X - X_min)/(X_max - X_min)
+    return X
     # scaler = MinMaxScaler()
+    scaler = StandardScaler()
     # transform data
     X_train_scaled = scaler.fit_transform(np.array(X))
 
@@ -96,7 +102,11 @@ def _scale(X):
 
 
 def normalize(X):
-    return _scale(_filter_avg(_filter_hz(X)))
+    X = _filter_hz(X)
+    X = _filter_avg(X)
+    X = _scale(X)
+    return X
+
 
 
 def create_dataset(file_path, persons, moves=None):
