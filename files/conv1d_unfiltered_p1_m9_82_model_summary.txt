@@ -1,0 +1,32 @@
+Model: "sequential_171"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ reshape_119 (Reshape)       (None, 400, 1)            0         
+                                                                 
+ conv1d_237 (Conv1D)         (None, 396, 32)           192       
+                                                                 
+ dropout_575 (Dropout)       (None, 396, 32)           0         
+                                                                 
+ conv1d_238 (Conv1D)         (None, 392, 64)           10304     
+                                                                 
+ dropout_576 (Dropout)       (None, 392, 64)           0         
+                                                                 
+ conv1d_239 (Conv1D)         (None, 390, 128)          24704     
+                                                                 
+ dropout_577 (Dropout)       (None, 390, 128)          0         
+                                                                 
+ max_pooling1d_63 (MaxPoolin  (None, 195, 128)         0         
+ g1D)                                                            
+                                                                 
+ flatten_64 (Flatten)        (None, 24960)             0         
+                                                                 
+ dropout_578 (Dropout)       (None, 24960)             0         
+                                                                 
+ dense_539 (Dense)           (None, 9)                 224649    
+                                                                 
+=================================================================
+Total params: 259,849
+Trainable params: 259,849
+Non-trainable params: 0
+_________________________________________________________________

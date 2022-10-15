@@ -1,0 +1,34 @@
+Model: "sequential_170"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ reshape_118 (Reshape)       (None, 40, 10)            0         
+                                                                 
+ lstm_106 (LSTM)             (None, 40, 64)            19200     
+                                                                 
+ dropout_571 (Dropout)       (None, 40, 64)            0         
+                                                                 
+ lstm_107 (LSTM)             (None, 40, 16)            5184      
+                                                                 
+ dropout_572 (Dropout)       (None, 40, 16)            0         
+                                                                 
+ flatten_63 (Flatten)        (None, 640)               0         
+                                                                 
+ dense_536 (Dense)           (None, 32)                20512     
+                                                                 
+ dropout_573 (Dropout)       (None, 32)                0         
+                                                                 
+ dense_537 (Dense)           (None, 32)                1056      
+                                                                 
+ dropout_574 (Dropout)       (None, 32)                0         
+                                                                 
+ batch_normalization_157 (Ba  (None, 32)               128       
+ tchNormalization)                                               
+                                                                 
+ dense_538 (Dense)           (None, 9)                 297       
+                                                                 
+=================================================================
+Total params: 46,377
+Trainable params: 46,313
+Non-trainable params: 64
+_________________________________________________________________
